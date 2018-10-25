@@ -85,6 +85,7 @@ public class DataMigration {
     private static final PassClient client = PassClientFactory.getPassClient(true);
     private static final org.dataconservancy.pass.v2_3.client.PassClient oldClient =
             org.dataconservancy.pass.v2_3.client.PassClientFactory.getPassClient();
+    private static final SubmissionStatusService statusService = new SubmissionStatusService();
     
     static {
         // Hardcoding these things in
@@ -193,8 +194,7 @@ public class DataMigration {
                     || newSubmission.getSubmissionStatus()==null
                     || submitter!=null) {
                 newSubmission.setSubmitter(submitter);
-                SubmissionStatusService statusService = new SubmissionStatusService(newSubmission);
-                newSubmission.setSubmissionStatus(statusService.calculateSubmissionStatus());
+                newSubmission.setSubmissionStatus(statusService.calculateSubmissionStatus(newSubmission));
                 client.updateResource(newSubmission);
                 LOG.info("Submission:{} was updated. Submitter:{}, Status:{}", 
                          uri, newSubmission.getSubmitter(), newSubmission.getSubmissionStatus());
