@@ -8,31 +8,31 @@
   	<dependency>
   		<groupId>org.dataconservancy.pass</groupId>
   		<artifactId>pass-client-api</artifactId>
-  		<version>0.4.1-SNAPSHOT</version>
+  		<version>0.4.2</version>
   	</dependency>
   	
   	<dependency>
   		<groupId>org.dataconservancy.pass</groupId>
   		<artifactId>pass-model</artifactId>
-  		<version>0.4.1-SNAPSHOT</version>
+  		<version>0.4.2</version>
   	</dependency>
   	
   	<dependency>
   		<groupId>org.dataconservancy.pass</groupId>
   		<artifactId>pass-data-client</artifactId>
-  		<version>0.4.1-SNAPSHOT</version>
+  		<version>0.4.2</version>
   	</dependency>
   	
   	<dependency>
   		<groupId>org.dataconservancy.pass</groupId>
   		<artifactId>pass-status-service</artifactId>
-  		<version>0.4.1-SNAPSHOT</version>
+  		<version>0.4.2</version>
   	</dependency>
   	
   	<dependency>
   		<groupId>org.dataconservancy.pass</groupId>
   		<artifactId>pass-client-shaded-v2_3</artifactId>
-  		<version>0.4.1-SNAPSHOT</version>
+  		<version>0.4.2</version>
   	</dependency>
   	
     <dependency>
