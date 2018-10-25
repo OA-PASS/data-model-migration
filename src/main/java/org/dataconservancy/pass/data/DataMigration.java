@@ -61,12 +61,6 @@ public class DataMigration {
 
     private static final Logger LOG = LoggerFactory.getLogger(DataMigration.class);
 
-    private final static String PASS_BASE_URL = "http://localhost:8080/fcrepo/rest/";
-    private final static String PASS_ELASTICSEARCH_URL = "http://localhost:9200/pass/";
-    private final static String PASS_FEDORA_USER = "fedoraAdmin";
-    private final static String PASS_FEDORA_PASSWORD = "moo";
-    private final static String PASS_SEARCH_LIMIT = "50000";
-
     private static final String DOMAIN = "johnshopkins.edu";
     private static final String EMPLOYEE_ID_TYPE = "employeeid";
     private static final String HOPKINS_ID_TYPE = "hopkinsid";
@@ -87,12 +81,18 @@ public class DataMigration {
             org.dataconservancy.pass.v2_3.client.PassClientFactory.getPassClient();
     private static final SubmissionStatusService statusService = new SubmissionStatusService();
     
+    private final static String PASS_BASE_URL = "http://localhost:8080/fcrepo/rest/";
+    private final static String PASS_ELASTICSEARCH_URL = "http://localhost:9200/pass/";
+    private final static String PASS_FEDORA_USER = "fedoraAdmin";
+    private final static String PASS_FEDORA_PASSWORD = "moo";
+    private final static String PASS_SEARCH_LIMIT = "50000";
+    
     static {
-        // Hardcoding these things in
-        System.setProperty("pass.fedora.baseurl", PASS_BASE_URL);
-        System.setProperty("pass.elasticsearch.url", PASS_ELASTICSEARCH_URL);
-        System.setProperty("pass.fedora.user", PASS_FEDORA_USER);
-        System.setProperty("pass.fedora.password", PASS_FEDORA_PASSWORD);
+        //Java client defaults will work in pass-docker environment, can override these by uncommenting hereafter
+        //System.setProperty("pass.fedora.baseurl", PASS_BASE_URL);
+        //System.setProperty("pass.elasticsearch.url", PASS_ELASTICSEARCH_URL);
+        //System.setProperty("pass.fedora.user", PASS_FEDORA_USER);
+        //System.setProperty("pass.fedora.password", PASS_FEDORA_PASSWORD);
         System.setProperty("pass.elasticsearch.limit", PASS_SEARCH_LIMIT);
     }
 
