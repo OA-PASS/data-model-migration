@@ -306,9 +306,10 @@ public class DataMigration {
     }
 
     private static void migrateRepository() {
+    	String baseUrl = FedoraConfig.getBaseUrl();
         URI jscholarshipRepoUri;
         try {
-            jscholarshipRepoUri = new URI("http://localhost:8080/fcrepo/rest/repositories/41/96/0a/92/41960a92-d3f8-4616-86a6-9e9cadc1a269");
+            jscholarshipRepoUri = new URI(baseUrl + "repositories/41/96/0a/92/41960a92-d3f8-4616-86a6-9e9cadc1a269");
             Repository repository = client.readResource(jscholarshipRepoUri, Repository.class);
             
             String formSchema = "{"  
