@@ -203,22 +203,15 @@ public class DataMigration {
                          uri, newSubmission.getSubmitter(), newSubmission.getSubmissionStatus());
                 if (newSubmission.getSource().equals(Source.PASS)
                         && newSubmission.getSubmitted()) {
-                    // shouldn't really need this check, but put in as a small extra precaution
-                    Map<String, Object> submEventSearch = new HashMap<String, Object>();
-                    submEventSearch.put("eventType", "submitted");
-                    submEventSearch.put("submission", uri);
-                    Set<URI> events = client.findAllByAttributes(SubmissionEvent.class, submEventSearch);
-                    if (events.size()==0) {
-                        SubmissionEvent event = new SubmissionEvent();
-                        event.setSubmission(uri);
-                        event.setPerformedBy(submitter);
-                        event.setEventType(EventType.SUBMITTED);
-                        event.setPerformerRole(PerformerRole.SUBMITTER);
-                        event.setPerformedDate(newSubmission.getSubmittedDate());
-                        URI eventUri = client.createResource(event);
-                        LOG.info("SubmissionEvent:{} was created for Submission {}", eventUri, uri);
-                        createdSubmissionEvents = createdSubmissionEvents+1;
-                    }
+                    SubmissionEvent event = new SubmissionEvent();
+                    event.setSubmission(uri);
+                    event.setPerformedBy(submitter);
+                    event.setEventType(EventType.SUBMITTED);
+                    event.setPerformerRole(PerformerRole.SUBMITTER);
+                    event.setPerformedDate(newSubmission.getSubmittedDate());
+                    URI eventUri = client.createResource(event);
+                    LOG.info("SubmissionEvent:{} was created for Submission {}", eventUri, uri);
+                    createdSubmissionEvents = createdSubmissionEvents+1;
                 }
                 successfulSubmissions = successfulSubmissions+1;
             }            
