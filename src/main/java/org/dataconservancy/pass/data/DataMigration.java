@@ -76,16 +76,15 @@ public class DataMigration {
     private static int unsuccessfulObjects = 0;
     private static int skippedObjects = 0;
 
-    private static final PassClient client = PassClientFactory.getPassClient(true);
-    private static final org.dataconservancy.pass.v2_3.client.PassClient oldClient =
-            org.dataconservancy.pass.v2_3.client.PassClientFactory.getPassClient();
-    private static final SubmissionStatusService statusService = new SubmissionStatusService();
+    private static PassClient client;
+    private static org.dataconservancy.pass.v2_3.client.PassClient oldClient;
+    private static SubmissionStatusService statusService;
     
     private final static String PASS_BASE_URL = "http://localhost:8080/fcrepo/rest/";
     private final static String PASS_ELASTICSEARCH_URL = "http://localhost:9200/pass/";
     private final static String PASS_FEDORA_USER = "fedoraAdmin";
     private final static String PASS_FEDORA_PASSWORD = "moo";
-    private final static String PASS_SEARCH_LIMIT = "50000";
+    private final static String PASS_SEARCH_LIMIT = "10000";
     
     static {
         //Java client defaults will work in pass-docker environment, can override these by uncommenting hereafter
@@ -108,6 +107,10 @@ public class DataMigration {
     public static void main(String[] args) {
         
         try {
+
+            client = PassClientFactory.getPassClient(true);
+            oldClient = org.dataconservancy.pass.v2_3.client.PassClientFactory.getPassClient();
+            statusService = new SubmissionStatusService();
             //include this block if you want to dump a copy of each deleted or edited record into a local folder.
             //for an example of how this is used, see delete consumer below
             /*

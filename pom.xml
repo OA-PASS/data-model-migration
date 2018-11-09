@@ -2,37 +2,37 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.dataconservancy.pass</groupId>
   <artifactId>data-model-migration</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.2-SNAPSHOT</version>
   <name>Data Model Migration</name>
   <dependencies>
   	<dependency>
   		<groupId>org.dataconservancy.pass</groupId>
   		<artifactId>pass-client-api</artifactId>
-  		<version>0.4.2</version>
+  		<version>0.5.1</version>
   	</dependency>
   	
   	<dependency>
   		<groupId>org.dataconservancy.pass</groupId>
   		<artifactId>pass-model</artifactId>
-  		<version>0.4.2</version>
+  		<version>0.5.1</version>
   	</dependency>
   	
   	<dependency>
   		<groupId>org.dataconservancy.pass</groupId>
   		<artifactId>pass-data-client</artifactId>
-  		<version>0.4.2</version>
+  		<version>0.5.1</version>
   	</dependency>
   	
   	<dependency>
   		<groupId>org.dataconservancy.pass</groupId>
   		<artifactId>pass-status-service</artifactId>
-  		<version>0.4.2</version>
+  		<version>0.5.1</version>
   	</dependency>
   	
   	<dependency>
   		<groupId>org.dataconservancy.pass</groupId>
   		<artifactId>pass-client-shaded-v2_3</artifactId>
-  		<version>0.4.2</version>
+  		<version>0.5.1</version>
   	</dependency>
   	
     <dependency>
