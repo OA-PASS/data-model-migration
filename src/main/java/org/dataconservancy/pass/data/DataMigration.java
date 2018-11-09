@@ -130,7 +130,10 @@ public class DataMigration {
     }    
     
     private static void migrateSubmissionModel() {
-        int recordsProcessed = client.processAllEntities(uri -> migrateSubmission(uri), Submission.class);
+    	successfulSubmissions=0;
+    	unsuccessfulSubmissions=0;
+    	createdSubmissionEvents=0;
+    	int recordsProcessed = client.processAllEntities(uri -> migrateSubmission(uri), Submission.class);
         
         LOG.info("********************************************************");
         LOG.info("Submission crawled: {}", recordsProcessed);
@@ -140,8 +143,8 @@ public class DataMigration {
         LOG.info("********************************************************");
     }
     private static void migrateUsers() {
-        successfulSubmissions = 0;
-        unsuccessfulSubmissions = 0;
+    	successfulObjects = 0;
+        unsuccessfulObjects = 0;
         skippedObjects = 0;
         int recordsProcessed =  client.processAllEntities(uri -> migrateUser(uri), User.class);
 
@@ -198,7 +201,6 @@ public class DataMigration {
                 client.updateResource(newSubmission);
                 LOG.info("Submission:{} was updated. Submitter:{}, Status:{}", 
                          uri, newSubmission.getSubmitter(), newSubmission.getSubmissionStatus());
-                successfulSubmissions = successfulSubmissions+1;
                 if (newSubmission.getSource().equals(Source.PASS)
                         && newSubmission.getSubmitted()) {
                     // shouldn't really need this check, but put in as a small extra precaution
@@ -218,6 +220,7 @@ public class DataMigration {
                         createdSubmissionEvents = createdSubmissionEvents+1;
                     }
                 }
+                successfulSubmissions = successfulSubmissions+1;
             }            
         } catch (Exception ex) {
             LOG.error("Could not update Submission {}. Error mesage: {}", uri, ex.getMessage());
