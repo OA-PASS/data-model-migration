@@ -201,8 +201,17 @@ public class DataMigration {
                 client.updateResource(newSubmission);
                 LOG.info("Submission:{} was updated. Submitter:{}, Status:{}", 
                          uri, newSubmission.getSubmitter(), newSubmission.getSubmissionStatus());
-                if (newSubmission.getSource().equals(Source.PASS)
-                        && newSubmission.getSubmitted()) {
+            } 
+            
+            // create event if need one
+            if (newSubmission.getSource().equals(Source.PASS)
+                    && newSubmission.getSubmitted()) {
+                // will check if one already exists, this allows for re-run
+                Map<String, Object> submEventSearch = new HashMap<String, Object>();
+                submEventSearch.put("eventType", "submitted");
+                submEventSearch.put("submission", uri);
+                Set<URI> events = client.findAllByAttributes(SubmissionEvent.class, submEventSearch);
+                if (events.size()==0) {
                     SubmissionEvent event = new SubmissionEvent();
                     event.setSubmission(uri);
                     event.setPerformedBy(submitter);
@@ -213,8 +222,9 @@ public class DataMigration {
                     LOG.info("SubmissionEvent:{} was created for Submission {}", eventUri, uri);
                     createdSubmissionEvents = createdSubmissionEvents+1;
                 }
-                successfulSubmissions = successfulSubmissions+1;
-            }            
+            }
+            successfulSubmissions = successfulSubmissions+1;
+            
         } catch (Exception ex) {
             LOG.error("Could not update Submission {}. Error mesage: {}", uri, ex.getMessage());
             unsuccessfulSubmissions = unsuccessfulSubmissions+1;
